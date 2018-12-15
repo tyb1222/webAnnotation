@@ -29,7 +29,7 @@ public class UserAspect {
 
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         System.out.println("aspect method is :"+method.getName());
-        UserAnno anno = method.getAnnotation(UserAnno.class);
+        UserAnno anno = method.getAnnotation(UserAnno.class); // abstract method ,anno is null
         Method declaredMethod = pjp.getTarget().getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
         UserAnno aa = declaredMethod.getAnnotation(UserAnno.class);
         UserAnno annotation = method.getAnnotation(UserAnno.class);
