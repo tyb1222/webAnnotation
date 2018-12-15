@@ -8,11 +8,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UserAnno {
-    String key();
+    String cacheKey();
 
     String cacheName();
 
-    boolean needLog() default false;
-
+    boolean loggable() default false;
 
 }

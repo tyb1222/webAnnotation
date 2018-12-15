@@ -33,16 +33,16 @@ public class UserAspect {
         Method declaredMethod = pjp.getTarget().getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
         UserAnno aa = declaredMethod.getAnnotation(UserAnno.class);
         UserAnno annotation = method.getAnnotation(UserAnno.class);
-//        String id = getValue(userAnno.key(),pjp);
-//        System.out.println("UserAnno key is "+ userAnno.key());
+//        String id = getValue(userAnno.cacheKey(),pjp);
+//        System.out.println("UserAnno cacheKey is "+ userAnno.cacheKey());
 //        System.out.println("UserAnno cacheName is "+ userAnno.cacheName());
-//        System.out.println("UserAnno needLog is "+ userAnno.needLog());
+//        System.out.println("UserAnno loggable is "+ userAnno.loggable());
 //        System.out.println("method before");
 //        Object result = pjp.proceed();
 //        System.out.println("method after");
 //        return result;
 
-        String key =  userAnno.key();
+        String key =  userAnno.cacheKey();
         String userId = getValue(key,pjp);
         String CACHE_KEY = userAnno.cacheName();
         Object obj = cacheService.get(userId, CACHE_KEY);
@@ -54,11 +54,11 @@ public class UserAspect {
         try {
             result  = pjp.proceed();
         } catch (Exception ex) {
-            if (userAnno.needLog()){
+            if (userAnno.loggable()){
                 logService.error("get user error" + ex);
             }
         }
-        if (userAnno.needLog()) {
+        if (userAnno.loggable()) {
             logService.info("get userName from db success");
         }
         cacheService.put(userId,result,CACHE_KEY);
