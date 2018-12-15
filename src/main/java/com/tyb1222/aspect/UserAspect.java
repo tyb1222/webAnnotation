@@ -49,7 +49,6 @@ public class UserAspect {
         if (null != obj) {
             return obj.toString();
         }
-        String userName = null;
         Object result = null;
         try {
             result  = pjp.proceed();
@@ -69,9 +68,8 @@ public class UserAspect {
         Object [] args = proceedingJoinPoint.getArgs();
         Method method = ((MethodSignature)proceedingJoinPoint.getSignature()).getMethod();
         Method declaredMethod = proceedingJoinPoint.getTarget().getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
-        String [] parmas = new LocalVariableTableParameterNameDiscoverer().getParameterNames(declaredMethod);
-//        String [] parmas = new String[]{"userId"};
-        return SpelParser.getValue(key,parmas,args);
+        String [] parameterNames = new LocalVariableTableParameterNameDiscoverer().getParameterNames(declaredMethod);
+        return SpelParser.getValue(key,parameterNames,args);
     }
 
 
