@@ -12,7 +12,7 @@ public @interface UserAnno {
 
     String cacheName();
 
-    boolean needLog() default false;
+    boolean loggable() default false;
 
 
 }
