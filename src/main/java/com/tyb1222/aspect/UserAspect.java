@@ -4,10 +4,12 @@ import com.tyb1222.anno.UserAnno;
 import com.tyb1222.service.CacheService;
 import com.tyb1222.service.LogService;
 import com.tyb1222.service.MessageService;
+import com.tyb1222.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.scheduling.annotation.Async;
@@ -34,6 +36,7 @@ public class UserAspect {
         System.out.println(Thread.currentThread().getName() +"111");
         messageService.sendEmail( ">>>abc");
         System.out.println(Thread.currentThread().getName() +"222");
+
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         System.out.println("declaring class:"+method.getDeclaringClass().getName());
 //        System.out.println("super class:"+method.getDeclaringClass().getSuperclass().getName());
